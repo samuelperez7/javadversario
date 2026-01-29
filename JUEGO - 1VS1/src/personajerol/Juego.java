@@ -10,7 +10,7 @@ public class Juego {
 		InputStreamReader flujo = new InputStreamReader(System.in);
 		BufferedReader lector = new BufferedReader(flujo);
 
-		// Creacion de personajess
+		// Creacion de personajes
 
 		Personaje personaje1 = null;
 		Personaje personaje2 = null;
