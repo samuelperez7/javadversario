@@ -10,16 +10,28 @@ public class Juego {
 		InputStreamReader flujo = new InputStreamReader(System.in);
 		BufferedReader lector = new BufferedReader(flujo);
 
-		// Creacion de personajes
+		// Declaración y asignación de personajes
 
+			// Protagonistas
 		Personaje personaje1 = null;
 		Personaje personaje2 = null;
 		Personaje personaje3 = null;
+		
+			// Enemigos
+		Personaje personaje4 = null;
+		Personaje personaje5 = null;
+		Personaje personaje6 = null;
 
 		try {
+			// Asignación de personajes protagonistas
 			personaje1 = new Personaje("David", 20, 3, 5);
 			personaje2 = new Personaje("Agustin", 20, 4, 6);
 			personaje3 = new Personaje("Sergio", 20, 4, 7);
+			
+			// Asignación de personajes enemigos
+			personaje4 = new Personaje("Evil Juan", 20, 3, 7);
+			personaje5 = new Personaje("Evil Alicia", 20, 5, 5);
+			personaje6 = new Personaje("Evil Antonio", 20, 3, 6);
 		} catch (VidaNoValidaException vidaEx) {
 			System.out.println(vidaEx.getMessage());
 		} catch (AgilidadNoValidaException agilidadEx) {
@@ -34,7 +46,7 @@ public class Juego {
 		System.out.println("   *******************************");
 		System.out.println();
 
-		// Elección de personaje
+		// Elección del protagonista
 
 		String personajeElegidoS = "0";
 		int personajeElegido;
@@ -59,7 +71,7 @@ public class Juego {
 			personajeElegido = Integer.parseInt(personajeElegidoS);
 		} while (personajeElegido != 1 && personajeElegido != 2 && personajeElegido != 3);
 
-		// Creación de protagonista
+		// Declaración y asignación de protagonista
 
 		Personaje protagonista = null;
 
@@ -75,26 +87,11 @@ public class Juego {
 			break;
 		}
 
-		// Creacion de enemigo
-		Personaje personaje4 = null;
-		Personaje personaje5 = null;
-		Personaje personaje6 = null;
-
-		try {
-			personaje4 = new Personaje("Evil Juan", 20, 3, 7);
-			personaje5 = new Personaje("Evil Alicia", 20, 5, 5);
-			personaje6 = new Personaje("Evil Antonio", 20, 3, 6);
-		} catch (VidaNoValidaException vidaEx) {
-			System.out.println(vidaEx.getMessage());
-		} catch (AgilidadNoValidaException agilidadEx) {
-			System.out.println(agilidadEx.getMessage());
-		} catch (FuerzaNoValidaException fuerzaEx) {
-			System.out.println(fuerzaEx.getMessage());
-		}
+		// Declaración y asignación de enemigo
 		
 		Personaje enemigo = null;
-		int enemigoElegido = (int) (Math.random()*3);
-		
+		int enemigoElegido = (int) (Math.random() * 3);
+
 		switch (enemigoElegido) {
 		case 0:
 			enemigo = personaje4;
@@ -107,7 +104,7 @@ public class Juego {
 			break;
 		}
 
-		// Inicio del juego
+		// Inicio de la partida
 		for (int i = 0; i < 50; i++) {
 			System.out.println();
 		}
@@ -148,21 +145,25 @@ public class Juego {
 			Thread.sleep(2400);
 			if (turnoGolpear == true) {
 				enemigo.recibirGolpe(protagonista.hacerAtaque());
-				System.out.println("Has golpeado a "+enemigo.getNombre()+"!!");
+				System.out.println("Has golpeado a " + enemigo.getNombre() + "!!");
 				if (enemigo.vidaRestante() > 0) {
-					System.out.println("Tu vida restante: " + Math.round((double)protagonista.vidaRestante()/20*100)+"%");
-					System.out.println("Vida de "+enemigo.getNombre()+": "+Math.round((double)enemigo.vidaRestante()/20*100)+"%");
+					System.out.println(
+							"Tu vida restante: " + Math.round((double) protagonista.vidaRestante() / 20 * 100) + "%");
+					System.out.println("Vida de " + enemigo.getNombre() + ": "
+							+ Math.round((double) enemigo.vidaRestante() / 20 * 100) + "%");
 				} else {
 					System.out.println();
 					System.out.println("🎉 ENHORABUENA! | HAS DERROTADO AL ENEMIGO 🎉");
 				}
 			} else {
 				protagonista.recibirGolpe(enemigo.hacerAtaque());
-				
-				System.out.println(enemigo.getNombre()+" te ha golpeado!!");
+
+				System.out.println(enemigo.getNombre() + " te ha golpeado!!");
 				if (protagonista.vidaRestante() > 0) {
-					System.out.println("Tu vida restante: " + Math.round((double)protagonista.vidaRestante()/20*100)+"%");
-					System.out.println("Vida de "+enemigo.getNombre()+": "+Math.round((double)enemigo.vidaRestante()/20*100)+"%");
+					System.out.println(
+							"Tu vida restante: " + Math.round((double) protagonista.vidaRestante() / 20 * 100) + "%");
+					System.out.println("Vida de " + enemigo.getNombre() + ": "
+							+ Math.round((double) enemigo.vidaRestante() / 20 * 100) + "%");
 				} else {
 					System.out.println();
 					System.out.println("☠ GAME OVER | HAS MUERTO ☠");
